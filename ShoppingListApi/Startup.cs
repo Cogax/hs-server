@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using NSwag.AspNetCore;
 using ShoppingListApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ShoppingListApi
 {
@@ -29,6 +23,11 @@ namespace ShoppingListApi
         {
             services.AddDbContext<ShoppingListContext>(opt => opt.UseInMemoryDatabase("ShoppingList"));
             services.AddMvc();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "HomeSpot.ShoppingList API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +38,11 @@ namespace ShoppingListApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly);
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShoppingList V1");
+            });
 
             app.UseMvc();
         }
