@@ -1,0 +1,144 @@
+﻿swagger: "2.0"
+info:
+  description: "This is a ShoppingList API."
+  version: "1.0.0"
+  title: "Swagger Petstore"
+  contact:
+    email: "andygyr@gmx.ch"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/"
+tags:
+- name: "ShoppingListItem"
+  description: "An entry on the shopping list"
+schemes:
+- "http"
+paths:
+  /shoppinglistitem:
+    post:
+      tags:
+      - "ShoppingListItem"
+      summary: "Add a new entry to the shopping list"
+      description: ""
+      operationId: "addShoppingListItem"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "item that needs to be added to the list"
+        required: true
+        schema:
+          $ref: "#/definitions/ShoppingListItem"
+      responses:
+        405:
+          description: "Invalid input"
+    get:
+      tags:
+      - "ShoppingListItem"
+      summary: "Get all items"
+      description: ""
+      operationId: "getAll"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+        405:
+          description: "Validation exception"
+  /shoppinglistitem/{itemId}:
+    get:
+      tags:
+      - "ShoppingListItem"
+      summary: "Find item by id"
+      description: "Returns a single ShoppingListItem"
+      operationId: "getById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "itemId"
+        in: "path"
+        description: "ID of item to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingListItem"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+    put:
+      tags:
+      - "ShoppingListItem"
+      summary: "Updates a item with form data"
+      description: ""
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "itemId"
+        in: "path"
+        description: "ID of item to be updated"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "updated item object"
+        required: true
+        schema:
+          $ref: "#/definitions/ShoppingListItem"
+      responses:
+        405:
+          description: "Invalid input"
+    delete:
+      tags:
+      - "ShoppingListItem"
+      summary: "Deletes a pet"
+      description: ""
+      operationId: "deletePet"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "itemId"
+        in: "path"
+        description: "Item id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+definitions:
+  ShoppingListItem:
+    type: "object"
+    required:
+    - "label"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      label:
+        type: "string"
+        example: "apple"
+      iscomplete:
+        type: "boolean"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
