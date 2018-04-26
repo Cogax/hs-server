@@ -10,5 +10,5 @@ namespace ShoppingListApi.Models
         }
 
         public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
-    }
+	}
 }
