@@ -67,7 +67,7 @@ namespace ShoppingListApi.Controllers
             }
 
             dbItem.IsComplete = item.IsComplete;
-            dbItem.Label = item.Label;
+            // dbItem.Label = item.Label; not yet possible
 
             _context.ShoppingListItems.Update(dbItem);
             _context.SaveChanges();
