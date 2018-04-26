@@ -23,6 +23,7 @@ namespace ShoppingListApi
         {
             services.AddDbContext<ShoppingListContext>(opt => opt.UseInMemoryDatabase("ShoppingList"));
             services.AddMvc();
+            services.AddCors();
 
             services.AddSwaggerGen(c =>
             {
@@ -37,6 +38,8 @@ namespace ShoppingListApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => { builder.AllowAnyHeader(); builder.AllowAnyMethod(); builder.AllowAnyOrigin(); });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
