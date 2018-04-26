@@ -24,7 +24,7 @@ namespace ShoppingListApi.Controllers
         [HttpGet]
         public IEnumerable<ShoppingListItem> GetAll()
         {
-            return _context.ShoppingListItems.ToList();
+            return _context.ShoppingListItems.Where(x => !x.IsComplete).ToList();
         }
 
         [HttpGet("{id}", Name = "GetItem")]
