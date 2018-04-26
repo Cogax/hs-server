@@ -71,7 +71,7 @@ namespace ShoppingListApi.Controllers
 
             _context.ShoppingListItems.Update(dbItem);
             _context.SaveChanges();
-            return new NoContentResult();
+            return new ObjectResult(item);
         }
 
         [HttpDelete("{id}")]
