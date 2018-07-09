@@ -1,13 +1,18 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FinanceApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShoppingListApi.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace ShoppingListApi
+namespace FinanceApi
 {
     public class Startup
     {
@@ -21,7 +26,7 @@ namespace ShoppingListApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ShoppingListContext>(opt => opt.UseInMemoryDatabase("ShoppingList"));
+            services.AddDbContext<FinanceContext>(opt => opt.UseInMemoryDatabase("Finance"));
             services.AddMvc();
             services.AddCors();
 
@@ -44,7 +49,7 @@ namespace ShoppingListApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShoppingListApi V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Finance V1");
             });
 
             app.UseMvc();
