@@ -19,7 +19,7 @@ namespace FinanceApi.Controllers
 
             if (_context.Expenses.Count() == 0)
             {
-                _context.Expenses.Add(new Expense { Label = "Banane", Amount = 100.00 });
+                _context.Expenses.Add(new Expense { Label = "Test Expense", Amount = 100.00 });
                 _context.SaveChanges();
             }
         }
